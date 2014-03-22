@@ -402,7 +402,7 @@ class CollectionsSuite extends FunSuite {
 
     val pubAndStreet = atThePub // add "ice-cream" costing 2.30
     val pubAndStreetCost = -1 // don't add manually!
-    val consumedItemsWithE = List() // all things consumed in the pub and the street
+    val consumedItemsWithE = List("") // all things consumed in the pub and the street
 
     // Adding "ice-cream" did not modify the original map, since it's immutable
     assert(atThePub.get("ice-cream") === None, "Ice-cream was not taken in the pub!")
