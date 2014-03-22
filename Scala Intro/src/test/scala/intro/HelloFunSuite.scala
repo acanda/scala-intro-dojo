@@ -18,7 +18,7 @@ class HelloFunSuite extends FunSuite{
    */
   test("1 + 1 = 2") {
     val i = 1 + 1
-    assert(i == 3)
+    assert(i == 2)
   }
 
   /**
@@ -31,7 +31,7 @@ class HelloFunSuite extends FunSuite{
    */
   test(" 2 + 2 - 1 + 2 - 3 + 4 - 3 sums to 3") {
     val i = 2 + 2 - 1 + 2 - 3 + 4 - 3
-    assert(i === 5)
+    assert(i === 3)
   }
 
 }

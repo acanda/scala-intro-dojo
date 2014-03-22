@@ -20,7 +20,7 @@ class ClassesAndObjectsSuite extends FunSuite {
     val classInstance = new SimplestClass
     assert(classInstance != null)
 
-    val objectInstance = ???
+    val objectInstance = SimplestObject
     assert(objectInstance != null)
   }
 
@@ -67,7 +67,7 @@ class ClassesAndObjectsSuite extends FunSuite {
   test("re-assignment to var") {
     val coder = new GeekyCoder
 
-    ???
+    coder.codesIn = "Ruby"
     assert(coder.codesIn === "Ruby")
   }
 
@@ -78,7 +78,7 @@ class ClassesAndObjectsSuite extends FunSuite {
   test("return type of procedure") {
     val coder = new GeekyCoder
 
-    assert(coder.dontLikeProcedures() === ???)
+    assert(coder.dontLikeProcedures() === ())
   }
 
   /**
@@ -89,8 +89,8 @@ class ClassesAndObjectsSuite extends FunSuite {
     val coder = new GeekyCoder
 
     val result = coder.preferFunctions
-    assert(result === ???)
-    assert(result.getClass === classOf[????])
+    assert(result === "Yes of course, it's Scala")
+    assert(result.getClass === classOf[String])
   }
 
   /**
@@ -99,8 +99,8 @@ class ClassesAndObjectsSuite extends FunSuite {
   test("truth about functions and expressions") {
     val coder = new GeekyCoder
     
-    assert(coder.preferFunctionsAndExpressionsIn(???) === "don't care")
-    assert(coder.preferFunctionsAndExpressionsIn("Scala") === coder.preferFunctionsAndExpressionsIn("Java"))
+    assert(coder.preferFunctionsAndExpressionsIn("Java") === "don't care")
+    assert(coder.preferFunctionsAndExpressionsIn("Scala") !== coder.preferFunctionsAndExpressionsIn("Java"))
   }
 
   /**
@@ -130,16 +130,16 @@ class ClassesAndObjectsSuite extends FunSuite {
   test("calling overridden method on class") {
     val coder = new FunctionalGeekyCoder
 
-    assert(coder.preferFunctions === ???)
+    assert(coder.preferFunctions === "Always")
   }
 
   /**
    * How many times do you learn scala at this workshop?
    */
   test("calling method on object") {
-    val result: List[String] = ???
+    val result: List[String] = YouAfterWorkshop.skillsLearned
 
-    assert(result.size === ???)
+    assert(result.size === 100)
   }
 
   /**
@@ -176,8 +176,8 @@ class ClassesAndObjectsSuite extends FunSuite {
     val linus = new FamousGeekyCoder("Linus", "Torvalds", 42)
     linus.age += 1
 
-    assert(linus.fullName === "" + ??? + linus.lastName)
-    assert(linus.age === ???)
+    assert(linus.fullName === "Linus" + linus.lastName)
+    assert(linus.age === 43)
   }
 
   /**
@@ -185,9 +185,9 @@ class ClassesAndObjectsSuite extends FunSuite {
    * It's not correct while auxiliary constructor is used.
    */
   test("using auxiliary constructors") {
-    val bob = new FamousGeekyCoder("Uncle Bob")
+    val bob = new FamousGeekyCoder("Uncle Bob", "Martin", 55)
 
-    assert(bob.nickname != bob.fullName)
+    assert(bob.nickname !== bob.fullName)
   }
 
   /**
@@ -211,7 +211,7 @@ class ClassesAndObjectsSuite extends FunSuite {
     val coder1 = ScalaGeekyCoder("John", "Doe")
     val coder2 = new ScalaGeekyCoder("John", "Doe") // Try to remove the new keyword
 
-    ??? // Write equality test here, please
+    assert(coder1 == coder2)
   }
 
 }

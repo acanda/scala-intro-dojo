@@ -28,10 +28,10 @@ class NullExerciseSuite extends FunSuite {
    * and Scala "null" for squirrel
    */
   test("None is null and != null is Some") {
-    val radim: Option[User] = Some(User(1, "Radim", 32, ???))
+    val radim: Option[User] = Some(User(1, "Radim", 32, Some("B1")))
     assert(radim.get.drivingLicence.isDefined)
 
-    val squirrel: Option[User] = Some(User(1, "Ice Age", 100, ???))
+    val squirrel: Option[User] = Some(User(1, "Ice Age", 100, None))
     assert(squirrel.get.drivingLicence.isEmpty)
   }
 
@@ -71,18 +71,19 @@ class NullExerciseSuite extends FunSuite {
       assert("Username1" === user1.get.name)
     }
     val user2 = UserRepository.findById(2)
-    assert("Driving licence not specified" === ???)
+    val drivingLicence = user2.flatMap(_.drivingLicence)
+    assert("Driving licence not specified" === user2.flatMap(_.drivingLicence).getOrElse("Driving licence not specified"))
   }
 
   /**
    * Here some examples with filtering.
    */
   test("filtering should return None or Some") {
-    assert(??? == UserRepository.findById(1).filter(_.age > 40))
+    assert(None == UserRepository.findById(1).filter(_.age > 40))
     val filter = UserRepository.findById(2).filter(_.age > 30)
-    assert(filter.isInstanceOf[****])
+    assert(filter.isInstanceOf[Option[User]])
     // there isn't any user with id 100
-    assert(??? ==UserRepository.findById(100).filter(_.age > 1))
+    assert(None == UserRepository.findById(100).filter(_.age > 1))
   }
 
   /**
@@ -97,6 +98,6 @@ class NullExerciseSuite extends FunSuite {
     } yield category
 
 
-    assert(??? == categories.size)
+    assert(4 == categories.size)
   }
 }
