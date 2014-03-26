@@ -14,7 +14,7 @@ class ClassesAndObjectsSuite extends FunSuite {
   object SimplestObject // objects are directly instances, there's no static keyword in scala, objects are singletons
 
   /**
-   * How do you thing an Object is accessed?
+   * How do you think an Object is accessed?
    */
   test("difference between class and object") {
     val classInstance = new SimplestClass
