@@ -1,102 +1,119 @@
 package intro
 
 import org.scalatest.FunSuite
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 
-
+@RunWith(classOf[JUnitRunner])
 class NullExerciseSuite extends FunSuite {
 
   /**
-   * Let's start with something more interesting.
-   * Case classes are what is in Java known as
-   * data transfer objects.
-   * They have equals and toString for you automatically.
+   * What's the problem we are trying to solve?
    *
-   * There is a new keyword for you - Option.
-   * It is Scala way to express type with optional values.
-   * Option[A] can be instance of Some[A] or None
-   */
-  case class User(
-                   id: Int,
-                   name: String,
-                   age: Int,
-                   drivingLicence: Option[String]
-                   )
-
-  /**
-   * Here is how you use value that is not null.
-   * Use "B1" value here with Some instance
-   * and Scala "null" for squirrel
-   */
-  test("None is null and != null is Some") {
-    val radim: Option[User] = Some(User(1, "Radim", 32, ???))
-    assert(radim.get.drivingLicence.isDefined)
-
-    val squirrel: Option[User] = Some(User(1, "Ice Age", 100, ???))
-    assert(squirrel.get.drivingLicence.isEmpty)
-  }
-
-
-  /**
-   * Let's code something more difficult.
-   * We have map of users (see how elegant Scala is?)
-   * and we have two methods.
+   * NullpointerExceptions and constant null checks.
    *
-   * findById may and may not return values.
+   * A contrived example:
    */
-  object UserRepository {
-    private val users = Map(
-      1 -> User(1, "Username1", 32, Some("B1")),
-      2 -> User(2, "Username2", 100, None),
-      3 -> User(3, "Username3", 55, Some("B")),
-      5 -> User(5, "Username4", 25, Some("B1")),
-      4 -> User(4, "Username5", 45, Some("A1"))
-    )
 
-    def findById(id: Int): Option[User] = users.get(id)
+  def length(s: String): Int = s.length()
 
-    def findAll = users.values
-  }
+  length(null)
 
   /**
-   * This is Guava (Google collections) library way how to do
-   * it in Java.
+   * First exercise: delete the code above ^^^^.
    *
-   * Here search for method that returns alternative if
-   * value is not defined from <code>user2</code2>.
-   * Use http://www.scala-lang.org/api/current/index.html#scala.Option
+   * We use the Option type from here on instead:
    */
-  test("user with id=2 should have undefined driving license") {
-    val user1 = UserRepository.findById(1)
-    if (user1.isDefined) {
-      assert("Username1" === user1.get.name)
-    }
-    val user2 = UserRepository.findById(2)
-    assert("Driving licence not specified" === ???)
-  }
+
+  val noValue = None
+
+  val aValue = Some("value")
+
+  val maybe:Option[String] = someFunction()
+  /**
+   * The type ^^^^^^^^^^^^ annotation is just for clarity
+   * 
+   * The absence of a value is now explicit: None
+   * 
+   */
 
   /**
-   * Here some examples with filtering.
-   */
-  test("filtering should return None or Some") {
-    assert(??? == UserRepository.findById(1).filter(_.age > 40))
-    val filter = UserRepository.findById(2).filter(_.age > 30)
-    assert(filter.isInstanceOf[****])
-    // there isn't any user with id 100
-    assert(??? ==UserRepository.findById(100).filter(_.age > 1))
-  }
-
-  /**
-   * And final example. Using for comprehensions.
+   * You want to say "hello" but nobody is there:
    *
-   * Tip: use Console.out.println() and genders.mkString
+   * Use Some(_) and None() where appropriate.
+   *
    */
-  test("extract driving licence types from repository") {
-    val categories = for {
-      user <- UserRepository.findAll
-      category <- user.drivingLicence
-    } yield category
+  test("Use None to express the absence of a value and use Some for values") {
+    val hello: Option[String] = ???
+    assert(hello.isDefined)
 
-
-    assert(??? == categories.size)
+    val name: Option[String] = ???
+    assert(name.isEmpty)
   }
+
+  /**
+   * Now you can write code like this:
+   */
+
+  val name = Some("John")
+
+  if (name.isDefined) name.get else "No name defined"
+
+  /**
+   * But that is a bit clumsy. You might ask how is that better than checking for null?
+   *
+   * Check out the scala doc if we can do better:
+   *
+   * @see http://www.scala-lang.org/api/current/index.html#scala.Option
+   *
+   * We are looking for a method that gives us a default value
+   * if the Option is not defined == None
+   *
+   */
+  test("If an Option is not defined there can be a default value") {
+    assert("Hello World" === "Hello " + maybe.get)
+  }
+  
+  
+  /**
+   * What if just want to ignore the non-existing values 
+   * without checking for None all the time?
+   * 
+   */
+  test("Option.map and flatMap help unpacking the goods") {
+    
+    val names = List(Some("Peter"), None, Some("Mary"))
+    
+    assert(names.flatMap(n => n.map("Hello " + _)) === ???)
+  }
+  
+
+  /**
+   * That looked quite complicated to the untrained eye...
+   * 
+   * For comprehensions help 'unpacking' Options 
+   * so that we can use the values they 'contain'.
+   * 
+   * And as before: they are "None-safe"
+   *
+   * Tip: you can use Console.out.println() to find out 
+   * what the result looks like
+   */
+  test("For comprehensions can be easier to read than flatMap & Co") {
+    val names = List(Some("Peter"), Some("Paul"), None, Some("Mary"))
+
+    val greetings = for {
+      mayBeAName <- names
+      certainlyAName <- mayBeAName
+    } yield "Hello " + certainlyAName
+
+    assert(??? == greetings.size)
+  }
+  
+  /**
+   * That's all. You made it. 
+   * 
+   * The code below is just for demonstration purposes. 
+   */
+  def someFunction() = None
 }
