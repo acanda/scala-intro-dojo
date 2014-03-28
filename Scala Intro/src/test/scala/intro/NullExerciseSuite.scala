@@ -76,7 +76,7 @@ class NullExerciseSuite extends FunSuite {
   
   
   /**
-   * What if just want to ignore the non-existing values 
+   * What if you just want to ignore the non-existing values 
    * without checking for None all the time?
    * 
    */
