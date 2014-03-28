@@ -104,47 +104,6 @@ class CollectionsSuite extends FunSuite {
   }
 
   /**
-   * Immutable Sets.
-   *
-   * In contrast to Lists, Sets hold *unique* values.
-   *
-   * The default implementation of Set is IMMUTABLE.
-   *
-   * Many of the same operations that you learned for lists also
-   * are available to Sets.
-   *
-   * There is one difference: when adding an element, you use "+"
-   * instead of "+:" or ":+". This is because there is no "position
-   * to add to" (as we defined above).
-   *
-   * Can you complete the years to satisfy the conditions?
-   *
-   * You will be adding one element with "+" and two sets with "++"
-   * You can remove one element with "-"
-   * You can remove many elements with "--"
-   * There is "intersect(otherSet)" to calculate the intersection between
-   * two sets.
-   *
-   */
-  test("introduction to sets") {
-    val years = Set(2010, 2011, 2010, 2012, 2011, 2013) // ;-)
-    val twoYeasInTheFuture = Set(2014) + ??? // fix
-    val yearsUpTo2015 = Set(0) // fix
-    val without2015 = Set(0) // fix
-    val someOddYears = Set(2010, 2012, 2014, 2016, 2018)
-    val oddYearsUpTo2015 = Set(0) // "intersect" of "someOddYears" and "yearsUpTo2015"
-
-    // Note that original Sets are immutable (not changed)
-    assert(years.size === 4, "Original years should be 4")
-
-    // Assertions on *new* Sets
-    assert(yearsUpTo2015.size === 6)
-    assert(yearsUpTo2015.contains(2015), "Should include the year 2015")
-    assert(!without2015.contains(2015), "Should NOT include the year 2015")
-    assert(oddYearsUpTo2015.size === 3, "Should have 3 elements")
-  }
-
-  /**
    * Filtering is done by passing an anonymous function which
    * takes as a parameter an element of the same type as the list.
    *
@@ -217,9 +176,17 @@ class CollectionsSuite extends FunSuite {
   /**
    * With the method "exists" you can see if there
    * is an element that satisfies a condition.
+   * Example:
+   * 
+   *  Seq("blah", "", "foo").exists( str => str.isEmpty )
+   *  // output: true
    *
    * With "count" you can count how many satisfy that
    * condition.
+   * Example:
+   * 
+   *  Seq("blah", "", "foo").count( str => !str.isEmpty )
+   *  // output: 2
    *
    * Help! Is there a doctor in the audience? Find out.
    * Also find out how many developers are in the list.
