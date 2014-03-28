@@ -240,65 +240,6 @@ class CollectionsSuite extends FunSuite {
   }
 
   /**
-   * You can sort a collection with the "sorted" method.
-   * This works for collections where Scala knows how to sort them.
-   * (note that you can not sort Sets)
-   */
-  test("simple sorting") {
-    val numbers = List(5, 2, 7, 1, 3)
-    val sortedNumbers = ??? // fix (sort them!)
-    val greekLetters = List("gamma", "beta", "omega", "alpha")
-    val sortedGreekLetters = greekLetters // sort them!
-
-    assert(List(1, 2, 3, 5, 7) === sortedNumbers, "Numbers should be sorted")
-    assert("alpha" === sortedGreekLetters(0), "Alpha should be first")
-    assert("omega" === sortedGreekLetters(3), "Omega should be last")
-  }
-
-  /**
-   * Another way to sort a collection is through the method "sortBy".
-   *
-   * The parameter for sortBy should be a closure that returns
-   * a numerical value. The collection will be sorted ascendingly
-   * using that numerical value.
-   *
-   * Example:
-   *   List("abc","ab","a","abcde","abcd").sortBy(_.length)
-   * Output:
-   *   List(a, ab, abc, abcd, abcde)
-   *
-   * (Remember that "_" is the "wildcard"-argument)
-   *
-   * Can you sort these programing languages according to
-   * their year of appearance?
-   *
-   * HINT: use "string".toInt to parse to an Integer;
-   * HINT: to get the year, you can split by the space
-   *   or use takeRight(n) which will give you the last
-   *   "n" elements of a collection (String is a collection) 
-   */
-  test("sorting programming languages") {
-    val langs = List(
-      "Scala: 2003",
-      "Lisp: 1958",
-      "Java: 1995",
-      "Haskell: 1990",
-      "Smalltalk: 1972",
-      "Ruby: 1995",
-      "Erlang: 1986",
-      "C#: 2000")
-
-    val sorted = List(???) // fix, use sortBy by getting the year
-    
-    assert("Lisp: 1958" === sorted.head, "In the beginning, it was Lisp")
-    assert("Scala: 2003" === sorted(7), "The youngest language of the lot is Scala")
-
-    // Bonus: use "map" to extract the years, and "sorted" to sort them 
-    // val sortedYears = ???
-    // assert(List(1958, 1972, 1986, 1990, 1995, 1995, 2000, 2003) === sortedYears)
-  }
-
-  /**
    * Reducing a collection is to apply one operation to all
    * its members to obtain a final result.
    *
