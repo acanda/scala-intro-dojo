@@ -169,13 +169,13 @@ class CollectionsSuite extends FunSuite {
    */
   test("filtering numbers greater than 4") {
     val numbers = (1 until 8)
-    val evenNrs = numbers.filter(_ > 44) // fix
+    val greaterThanFour = numbers.filter(_ > 44) // fix
 
     assert(numbers.contains(8) === false, "Should not contain 8 (note the *until*)")
 
-    assert(evenNrs.size === 3, "Should find 3 numbers")
-    assert(evenNrs.contains(5), "Should contain 5")
-    assert(!evenNrs.contains(4), "Should not contain 4")
+    assert(greaterThanFour.size === 3, "Should find 3 numbers")
+    assert(greaterThanFour.contains(5), "Should contain 5")
+    assert(!greaterThanFour.contains(4), "Should not contain 4")
   }
 
   /**
