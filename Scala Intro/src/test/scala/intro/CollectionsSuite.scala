@@ -1,7 +1,12 @@
 package intro
 
+import org.junit.runner.RunWith
+import org.scalatest.FunSuite
+import org.scalatest.junit.JUnitRunner
+
 import org.scalatest.FunSuite
 
+@RunWith(classOf[JUnitRunner])
 class CollectionsSuite extends FunSuite {
 
   example {
