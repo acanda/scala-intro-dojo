@@ -1,7 +1,12 @@
 package intro
 
+import org.junit.runner.RunWith
+import org.scalatest.FunSuite
+import org.scalatest.junit.JUnitRunner
+
 import org.scalatest.FunSuite
 
+@RunWith(classOf[JUnitRunner])
 class HelloFunSuite extends FunSuite{
   /**
    * This is our first exercise. We will use ScalaTest library
